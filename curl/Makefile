@@ -6,7 +6,7 @@ MAINTAINER =        Damian Parrino <bucanero@users.noreply.github.com>
 LICENSE =           custom
 SHORT_DESC =        A library for transferring data with URL syntax.
 
-# This port uses the autotools scripts that are included with the distfiles.
+# This port uses CMake.
 PORT_BUILD =        cmake
 
 # Provide SSL support library
@@ -14,7 +14,7 @@ DEPENDENCIES =      zlib polarssl
 
 # What files we need to download, and where from.
 DOWNLOAD_SITE  =    https://curl.haxx.se/download
-DOWNLOAD_FILES =    curl-7.64.1.tar.gz
+DOWNLOAD_FILES =    ${PORTNAME}-${PORTVERSION}.tar.gz
 
 TARGET =            libcurl.a
 
@@ -29,7 +29,6 @@ PREBUILD = curl_prebuild
 curl_prebuild:
 	cp files/CMakeLists.txt build/${PORTNAME}-${PORTVERSION}
 	cp files/FindPolarSSL.cmake build/${PORTNAME}-${PORTVERSION}/CMake
-#	sed -i '694s/.*/if(0){/' build/${PORTNAME}-${PORTVERSION}/lib/connect.c
 
 # Add a pre-install target to get the built library where we expect it.
 # This, copied from opus, might be solvable by
